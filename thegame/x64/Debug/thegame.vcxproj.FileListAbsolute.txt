@@ -1,0 +1,4 @@
+D:\c语言学习\项目\dino示例\my dino\thegame\x64\Debug\thegame.exe
+D:\c语言学习\项目\yjsp running\my dino\thegame\x64\Debug\thegame.exe
+D:\c语言学习\项目\the flight of yjsp\my dino\thegame\x64\Debug\thegame.exe
+D:\c语言学习\项目\小先辈\the flight of yjsp\thegame\x64\Debug\thegame.exe
