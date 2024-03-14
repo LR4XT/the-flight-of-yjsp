@@ -34,6 +34,13 @@ typedef struct {//定义app结构，存放必要的全局变量
 }App;
 
 App app;
+bool jump;
+bool down;
+bool crouch;
+bool collision;
+bool detect[3];
+unsigned long score_m;
+double rate;
 
 
 

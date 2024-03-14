@@ -115,6 +115,7 @@ void Render_Background() {
 	for (int i = 0; i < 2; i++) {
 		SDL_RenderCopy(app.render, app.texture_road, NULL, &app.Road_rect[i]);//复制到渲染器
 	}
+
 }
 
 
@@ -123,8 +124,8 @@ void do_menuevent() {//菜单界面的事件处理
 	while (SDL_WaitEvent(&app.mainevent)) {
 		switch (app.mainevent.type) {
 			case SDL_QUIT:
-			quit_app();
-			break;
+				quit_app();
+				break;
 			case SDL_KEYDOWN:
 				switch (app.mainevent.key.keysym.sym) {
 				case SDLK_ESCAPE:
@@ -132,31 +133,15 @@ void do_menuevent() {//菜单界面的事件处理
 					break;
 				case SDLK_SPACE:
 
-					bool quit = false;//创建一个退出选项
-					while (!quit) {
-						while (SDL_PollEvent(&app.event) != 0) {
-							if (&app.event.type == SDL_QUIT)
-							{
-								quit_app();
-								quit = true;
-
-
-
-							}
-						}
-
-						SDL_RenderClear(app.render);
-						Render_Background();
-						SDL_RenderPresent(app.render);
-						SDL_Delay(10);
-
-
-
-					}
+					SDL_RenderClear(app.render);
+					play();
+					quit_app();
 					break;
 				default:
 					break;
+
 				}
+				break;
 
 			default:
 				break;
@@ -177,5 +162,82 @@ void draw_menu() {
 	SDL_RenderPresent(app.render);
 }
 
+void playset()
+{
+	srand((unsigned int)time(NULL));
+	jump = false;
+	down = false;
+	crouch = false;
+	collision = false;
+	score_m = 0;
+}
+void play() {
+	playset();
+	while (true) {
+
+
+		clock_t FstartTime = clock();
+		if (SDL_PollEvent(&app.event))
+		{
+			switch (app.event.type)
+			{
+			case SDL_QUIT:
+				return;
+				break;
+			case SDL_KEYDOWN:
+				switch (app.event.key.keysym.sym)
+				{
+				case SDLK_ESCAPE:
+					return;
+					break;
+				case SDLK_DOWN:
+					down = true;
+					break;
+				case SDLK_UP:
+				case SDLK_SPACE:
+					jump = true;
+					break;
+				default:
+					break;
+				}
+				break;
+
+			case SDL_KEYUP:
+				switch (app.event.key.keysym.sym)
+				{
+				case SDLK_DOWN:
+					down = false;
+					crouch = false;
+					break;//将俯冲状态解除
+				default:
+					break;
+				}
+				break;
+			default:
+				break;
+			}
+			
+			
+		}
+
+		score_m++;//根据分数加速
+		if (score_m >= 2500)
+		{
+			rate = 1.25;
+		}
+		else if(score_m>10000)
+		{
+			rate = 1.5;
+
+		}
+		SDL_RenderClear(app.render);
+
+		Render_Background();
+
+		SDL_RenderPresent(app.render);
+		SDL_Delay(10);
+
+	}
+}
 
 
