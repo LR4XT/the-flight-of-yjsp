@@ -1,4 +1,6 @@
 ﻿  thegame.c
-D:\Local Repositories\the-flight-of-yjsp\thegame\thegame.c(67,10): warning C4098: “quit_app”:“void”函数返回值
-D:\Local Repositories\the-flight-of-yjsp\thegame\thegame.c(25): warning C4716: “SDL_main”: 必须返回一个值
+D:\Local Repositories\the-flight-of-yjsp\thegame\thegame.c(79,10): warning C4098: “quit_app”:“void”函数返回值
+D:\Local Repositories\the-flight-of-yjsp\thegame\thegame.c(114,19): warning C4047: “=”:“Mix_Chunk *”与“int”的间接级别不同
+D:\Local Repositories\the-flight-of-yjsp\thegame\thegame.c(118,19): warning C4047: “=”:“Mix_Chunk *”与“int”的间接级别不同
+D:\Local Repositories\the-flight-of-yjsp\thegame\thegame.c(29): warning C4716: “SDL_main”: 必须返回一个值
   thegame.vcxproj -> D:\Local Repositories\the-flight-of-yjsp\thegame\x64\Debug\thegame.exe

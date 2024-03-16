@@ -29,6 +29,9 @@ typedef struct {//定义app结构，存放必要的全局变量
 	SDL_Rect Road_rect[2];
 	SDL_Rect rect_title;
 	SDL_Event mainevent;
+
+	Mix_Music *bgm;
+	Mix_Chunk *sound[5];
 	bool* keyboard;
 	
 }App;

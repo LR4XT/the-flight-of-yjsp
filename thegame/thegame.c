@@ -1,7 +1,6 @@
 ﻿#include"common.h"
 #include"MAIN.h"
-void do_menuevent();
-void draw_menu();
+
 
 
 int main(int argc,char*argv[])//主程序内装各种封装的函数
@@ -13,6 +12,7 @@ int main(int argc,char*argv[])//主程序内装各种封装的函数
 	Prepare_All();
 
 	draw_menu();
+
 	do_menuevent();
 
 	
@@ -59,10 +59,18 @@ static void quit_app()
 	SDL_FreeSurface(app.surface_menu);
 
 
+	
+
 	SDL_DestroyTexture(app.texture_road);
 	SDL_DestroyTexture(app.texture_title);
 	SDL_DestroyTexture(app.texture_menu);
 	TTF_CloseFont(app.font_title);
+
+	Mix_FreeChunk(app.sound[0]);
+	Mix_FreeChunk(app.sound[1]);
+	Mix_FreeMusic(app.bgm);
+	Mix_CloseAudio();
+	
 	
 	return 0;
 }
@@ -98,6 +106,21 @@ void Prepare_All() {
 	app.Road_rect[1].w = app.surface_road->w;
 	app.Road_rect[1].h = app.surface_road->h;
 
+	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2048);//默认channel有两个
+	if (app.sound[0] = Mix_LoadWAV("audio/8m.mp3") == NULL) {//原来是音效的问题 可能是采样率吧
+		printf("sound[0]打开失败");
+	}
+
+	if (app.sound[1] = Mix_LoadWAV("audio/flowing.mp3") == NULL) {//原来是音效的问题 可能是采样率吧
+		printf("sound[0]打开失败");
+	}
+
+	app.bgm = Mix_LoadMUS("audio/bgm.mp3");//音乐 一个
+
+
+
+
+	
 }
 
 void Render_Background() {
@@ -132,9 +155,27 @@ void do_menuevent() {//菜单界面的事件处理
 					quit_app();
 					break;
 				case SDLK_SPACE:
-
+					
 					SDL_RenderClear(app.render);
+
+					
+
+
+
+
+					Mix_PlayMusic(app.bgm, 0);
+					Mix_VolumeMusic(96);
+					Mix_PlayChannel(1, app.sound[1], 0);
+					Mix_Volume(1, 140);
+
+					Mix_PlayChannel(0, app.sound[0], 100);
+					Mix_Volume(0, 140);
+
+
+		
 					play();
+
+
 					quit_app();
 					break;
 				default:
